@@ -8,24 +8,30 @@ import static org.hamcrest.CoreMatchers.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class KirbyTest {
-  private WebDriver driver;
-  private String baseUrl;
+  static WebDriver driver = new FirefoxDriver();
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://wikirby.com/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    //driver = new HtmlUnitDriver();
+    driver.get("http://wikirby.com/wiki/Kirby_Wiki");
+    
   }
 
+ //User Scenario:
+  //Given on WiKirby homepage,
+  //When I click on the 'Enemies' link,
+  //Then I should be taken to the 'Category: Enemies' page
   @Test
-  public void testKirby() throws Exception {
-    driver.get(baseUrl + "/wiki/Kirby_Wiki");
+  public void testEnemies() throws Exception {
+	driver.get("http://wikirby.com/wiki/Kirby_Wiki");
     driver.findElement(By.cssSelector("a[title=\"Visit the main page\"]")).click();
+    driver.findElement(By.linkText("Enemies")).click();
+    assertEquals("Category:Enemies - WiKirby", driver.getTitle());
   }
 
   @After
