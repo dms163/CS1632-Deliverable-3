@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class KirbyTest {
-  static WebDriver driver = new HtmlUnitDriver();
+  static WebDriver driver = new FirefoxDriver();
 
   //start at the homepage for each WiKirby test
   @Before
@@ -197,6 +197,70 @@ public class KirbyTest {
   	  assertTrue(driver.getPageSource().contains("Login error"));
     }
     
+ ////////////////////////////////////////////////////////////////
+ /*User Story 3:
+ *As a user,
+ *I would like to search WiKirby,
+ *so that I can look up specific pages that I am interested in viewing.
+ */
+ ///////////////////////////////////////////////////////////////
+
+    /*Scenario 3-1:
+    *Given on WiKirby home page,
+    *When I click on the Search link near the top of the page,
+    *Then I should be brought to the Search page
+    */
+    @Test
+    public void testSearchLink() throws Exception {
+      driver.get("http://wikirby.com/wiki/Kirby_Wiki");
+      driver.findElement(By.id("mw-searchButton")).click();
+      assertEquals(driver.getTitle(), "Search - WiKirby");
+    }
+    
+    /*Scenario 3-2:
+     *Given on WiKirby home page,
+     *When I click on the Search link near the top of the page
+     *and then the 'Advanced' option,
+     *and select 'Check All'
+     *Then the 'Help' box should be checked
+     */
+    @Test
+    public void testAdvancedSearch() throws Exception {
+      driver.get("http://wikirby.com/wiki/Kirby_Wiki");
+      driver.findElement(By.id("searchGoButton")).click();
+      driver.findElement(By.linkText("Advanced")).click();
+      driver.findElement(By.xpath("//input[@value='All'][@type='button']")).click();
+      boolean isChecked = driver.findElement(By.name("ns12")).isSelected();
+      assertTrue(isChecked);
+    }
+    
+    /*Scenario 3-3:
+     * Given on WiKirby home page,
+     * When I click on the Search link and then the Search button,
+     * Then I will stay on the same Search page
+     */
+    @Test
+    public void testSearch() throws Exception {
+      driver.get("http://wikirby.com/wiki/Kirby_Wiki");
+      driver.findElement(By.id("mw-searchButton")).click();
+      driver.findElement(By.cssSelector("input.mw-ui-button.mw-ui-progressive")).click();
+      assertTrue(driver.getTitle().contains("Search"));
+    }
+    
+    /*Scenario 3-4:
+     * Given on WiKirby Search page,
+     * When I type "meow" into the search box and click search,
+     * Then result info should exist
+     */
+    @Test
+    public void testMeow() throws Exception {
+      driver.get("http://wikirby.com/w/index.php?title=Special%3ASearch&search=&fulltext=Search");
+      driver.findElement(By.id("searchText")).clear();
+      driver.findElement(By.id("searchText")).sendKeys("meow");
+      driver.findElement(By.cssSelector("input.mw-ui-button.mw-ui-progressive")).click();
+      int resultsSize = driver.findElements(By.className("results-info")).size();
+      assertTrue(resultsSize == 1);
+    }
     
   
   
