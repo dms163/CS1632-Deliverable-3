@@ -9,7 +9,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.util.concurrent.TimeUnit;
 
 public class KirbyTest {
-  static WebDriver driver = new FirefoxDriver();
+  static WebDriver driver = new HtmlUnitDriver();
 
   //start at the homepage for each WiKirby test
   @Before
@@ -280,9 +280,47 @@ public class KirbyTest {
       driver.findElement(By.id("mw-search-ns0")).click();
       driver.findElement(By.id("mw-search-ns3")).click();
       driver.findElement(By.cssSelector("input.mw-ui-button.mw-ui-progressive")).click();
-      assertTrue(driver.getPageSource().contains("There were no results matching the query."));
+      driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+      WebElement e = driver.findElement(By.className("mw-search-nonefound"));
+      assertTrue(e.isDisplayed());
     }
     
+////////////////////////////////////////////////////////////////
+/*User Story 4:
+*As a user,
+*I would like to edit pages on WiKirby,
+*so that I can contribute to the Wiki.
+*/
+///////////////////////////////////////////////////////////////
+
+ /*Scenario 4-1:
+ *Given on WiKirby home page,
+ *and not logged in,
+ *When I click on the Sandbox link,
+ *and try to edit a page,
+ *Then permission should be denied
+ */
+    @Test
+    public void testSandbox() throws Exception {
+      driver.get("http://wikirby.com/wiki/Kirby_Wiki");
+      driver.findElement(By.linkText("Sandbox")).click();
+      driver.findElement(By.linkText("here")).click();
+      WebElement e = driver.findElement(By.className("permissions-errors"));
+      assertTrue(e.isDisplayed());
+    }
+    
+ /*Scenario 4-2:
+ *Given on WiKirby Sandbox page,
+ *When I click on the Users link,
+ *Then I should see a "Bureaucrat" link
+ */
+    @Test
+    public void testUsersLink() throws Exception {
+      driver.get("http://wikirby.com/w/index.php?title=WiKirby:Sandbox&action=edit");
+      driver.findElement(By.linkText("Users")).click();
+      WebElement e = driver.findElement(By.linkText("Bureaucrat"));
+      assertTrue(e.isDisplayed());
+    }
     
     
   
