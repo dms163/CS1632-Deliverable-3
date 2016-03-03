@@ -340,7 +340,7 @@ public class KirbyTest {
      *Given on WiKirby Sandbox page,
      *When I click on the "help guide" link,
      *and then click on the "Basic Editing" link,
-     *Then I should see 
+     *Then I should see the heading that says "Basic Editing"
      */
     @Test
     public void testHelp() throws Exception {
