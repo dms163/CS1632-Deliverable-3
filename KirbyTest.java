@@ -350,10 +350,16 @@ public class KirbyTest {
     }
     
     /*Scenario 4-5:
-     *Given on WiKirby Sandbox page,
-     *When I click on the Users link,
-     *Then I should see a "Bureaucrat" link
+     *Given on WiKirby Help page,
+     *When I click on the link that says "here",
+     *Then I should see "Help talk: Contents"
      */
+    @Test
+    public void testHereHelpLink() throws Exception {
+      driver.get("http://wikirby.com/wiki/Help:Contents#Basic_Editing");
+      driver.findElement(By.cssSelector("span[title=\"Help talk:Contents\"]")).click();
+      assertTrue(driver.getPageSource().contains("Help talk:Contents"));
+    }
     
     
   
