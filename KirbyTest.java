@@ -9,7 +9,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.util.concurrent.TimeUnit;
 
 public class KirbyTest {
-  static WebDriver driver = new HtmlUnitDriver();
+  static WebDriver driver = new FirefoxDriver();
 
   //start at the homepage for each WiKirby test
   @Before
@@ -84,8 +84,9 @@ public class KirbyTest {
   public void testEnemiesPages() throws Exception {
     driver.get("http://wikirby.com/wiki/Kirby_Wiki");
     driver.findElement(By.linkText("Enemies")).click();
-    boolean pages = driver.getPageSource().contains("Pages in category \"Enemies\"");
-	assertTrue(pages);
+    //boolean pages = driver.getPageSource().contains("Pages in category \"Enemies\"");
+	int pages = driver.findElements(By.id("mw-pages")).size();
+    assertTrue(pages == 1);
   }
   
   
@@ -277,6 +278,7 @@ public class KirbyTest {
       driver.findElement(By.id("searchText")).clear();
       driver.findElement(By.id("searchText")).sendKeys("meow");
       driver.findElement(By.linkText("Advanced")).click();
+      driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
       driver.findElement(By.id("mw-search-ns0")).click();
       driver.findElement(By.id("mw-search-ns3")).click();
       driver.findElement(By.cssSelector("input.mw-ui-button.mw-ui-progressive")).click();
@@ -288,7 +290,7 @@ public class KirbyTest {
 ////////////////////////////////////////////////////////////////
 /*User Story 4:
 *As a user,
-*I would like to edit pages on WiKirby,
+*I would like to learn how to edit pages on WiKirby,
 *so that I can contribute to the Wiki.
 */
 ///////////////////////////////////////////////////////////////
@@ -331,7 +333,7 @@ public class KirbyTest {
     public void testBureaucrat() throws Exception {
       driver.get("http://wikirby.com/wiki/WiKirby:Users");
       driver.findElement(By.linkText("Bureaucrat")).click();
-      assertTrue(driver.getPageSource().contains("in charge"));
+      assertTrue(driver.getPageSource().contains("Bureaucrats"));
     }
     
     /*Scenario 4-4:
