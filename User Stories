@@ -58,60 +58,60 @@ User Story 2:
 		then I should see the page navigate to the Wikirby "Villians" page.	 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 User Story 3:
-	As a user I want to search Wikirby's website 
-	So that I can look for articles relating to my search.
+	As a user I want to be able to go to other Wiki websites  
+	So that I can look at different Wikis and explore.
 
 	Scenario 1-1:
 		Given that I'm on Wikirby main page, 
-		when I try to click the "All categories" link,
-		then I should see the page navigate to the Wikirby "Categories" page.
+		when I try to click the "Bulbapedia" link,
+		then I should see the page navigate to the Bublapedia main page.
 
 	Scenario 1-2:
-		Given that I'm on the Wikirby "Categories" page, 
-		when I try to click "Bosses" link,
-		then I should see the page navigate to the Wikirby "Bosses" page.
+		Given that I'm on the Wikirby main page, 
+		when I try to click "Metroid Wiki" link,
+		then I should see the page navigate to the Metroid Wiki main page.
 
 	Scenario 1-3:	
-		Given that I'm on the Wikirby "Categories" page,
-		when I try to click the "Animal Friends" link, 
-		then I should see the page navigate to the Wikirby "Animal Friends" page.
+		Given that I'm on the Wikirby main page,
+		when I try to click the "Pikmin Fanon" link, 
+		then I should see the page navigate to the Pikmin Fanon main page.
 
 	Scenario 1-4:
-		Given that I'm on the Wikirby "Categories" page, 
-		when I try to click the "Invincible Enemies" link, 
-		then I should see the page navigate to the Wikirby "Invincible Enemies" page.
+		Given that I'm on the Wikirby main page, 
+		when I try to click the "Super Mario Wiki" link, 
+		then I should see the page navigate to the Super Mario Wiki main page.
 
 	Scenario 1-5:
-		Given that I'm on the Wikirby "Categories" page, 
-		when I try to click the "Villians" link,
-		then I should see the page navigate to the Wikirby "Villians" page.	 	
+		Given that I'm on the Wikirby main page, 
+		when I try to click the "Zelda Wiki" link,
+		then I should see the page navigate to the Zelda Wiki main page.	 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 User Story 4:
-	As a user I want to search Wikirby's website 
-	So that I can look for articles relating to my search.
+	As a user I want to browse the Characters page 
+	So that I can look at the different characters in Kirby's universe.
 
 	Scenario 1-1:
 		Given that I'm on Wikirby main page, 
-		when I try to click the "All categories" link,
-		then I should see the page navigate to the Wikirby "Categories" page.
+		when I try to click the "Characters" link,
+		then I should see the page navigate to the Wikirby "Characters" page.
 
 	Scenario 1-2:
-		Given that I'm on the Wikirby "Categories" page, 
-		when I try to click "Bosses" link,
-		then I should see the page navigate to the Wikirby "Bosses" page.
+		Given that I'm on the Wikirby "Characters" page, 
+		when I try to click "Adeleine" link,
+		then I should see the page navigate to the Wikirby "Adeleine" page.
 
 	Scenario 1-3:	
-		Given that I'm on the Wikirby "Categories" page,
-		when I try to click the "Animal Friends" link, 
-		then I should see the page navigate to the Wikirby "Animal Friends" page.
+		Given that I'm on the Wikirby "Characters" page,
+		when I try to click the "Gooey" link, 
+		then I should see the page navigate to the Wikirby "Gooey" page.
 
 	Scenario 1-4:
-		Given that I'm on the Wikirby "Categories" page, 
-		when I try to click the "Invincible Enemies" link, 
-		then I should see the page navigate to the Wikirby "Invincible Enemies" page.
+		Given that I'm on the Wikirby "Characters" page, 
+		when I try to click the "Meta Knight" link, 
+		then I should see the page navigate to the Wikirby "Meta Knight" page.
 
 	Scenario 1-5:
-		Given that I'm on the Wikirby "Categories" page, 
-		when I try to click the "Villians" link,
-		then I should see the page navigate to the Wikirby "Villians" page.	 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////									
+		Given that I'm on the Wikirby "Characters" page, 
+		when I try to click the "Zero" link,
+		then I should see the page navigate to the Wikirby "Zero" page.	 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
