@@ -322,6 +322,39 @@ public class KirbyTest {
       assertTrue(e.isDisplayed());
     }
     
+    /*Scenario 4-3:
+     *Given on WiKirby Users page,
+     *When I click on the Bureaucrat link,
+     *Then I should see the Bureaucrat page, with the term's definition
+     */
+    @Test
+    public void testBureaucrat() throws Exception {
+      driver.get("http://wikirby.com/wiki/WiKirby:Users");
+      driver.findElement(By.linkText("Bureaucrat")).click();
+      assertTrue(driver.getPageSource().contains("in charge"));
+    }
+    
+    /*Scenario 4-4:
+     *Given on WiKirby Sandbox page,
+     *When I click on the "help guide" link,
+     *and then click on the "Basic Editing" link,
+     *Then I should see 
+     */
+    @Test
+    public void testHelp() throws Exception {
+      driver.get("http://wikirby.com/wiki/WiKirby:Sandbox");
+      driver.findElement(By.linkText("help guide")).click();
+      driver.findElement(By.cssSelector("li.toclevel-2.tocsection-2 > a > span.toctext")).click();
+      WebElement e = driver.findElement(By.id("Basic_Editing"));
+      assertTrue(e.isDisplayed());
+    }
+    
+    /*Scenario 4-5:
+     *Given on WiKirby Sandbox page,
+     *When I click on the Users link,
+     *Then I should see a "Bureaucrat" link
+     */
+    
     
   
   
