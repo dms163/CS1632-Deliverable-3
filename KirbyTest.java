@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import java.util.concurrent.TimeUnit;
 
 public class KirbyTest {
   static WebDriver driver = new FirefoxDriver();
@@ -13,7 +14,6 @@ public class KirbyTest {
   //start at the homepage for each WiKirby test
   @Before
   public void setUp() throws Exception {
-    //driver = new HtmlUnitDriver();
     driver.get("http://wikirby.com/wiki/Kirby_Wiki");
     
   }
@@ -229,6 +229,7 @@ public class KirbyTest {
       driver.get("http://wikirby.com/wiki/Kirby_Wiki");
       driver.findElement(By.id("searchGoButton")).click();
       driver.findElement(By.linkText("Advanced")).click();
+      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
       driver.findElement(By.xpath("//input[@value='All'][@type='button']")).click();
       boolean isChecked = driver.findElement(By.name("ns12")).isSelected();
       assertTrue(isChecked);
@@ -261,6 +262,28 @@ public class KirbyTest {
       int resultsSize = driver.findElements(By.className("results-info")).size();
       assertTrue(resultsSize == 1);
     }
+    
+    /*Scenario 3-5:
+     * Given on WiKirby Search page,
+     * When I type "meow" into the search box
+     * and select Advanced,
+     * and uncheck 'main' and check 'User talk'
+     * Then "No results matching the query" should be displayed
+     */
+    @Test
+    public void testMeowSearch() throws Exception {
+      driver.get("http://wikirby.com/w/index.php?title=Special%3ASearch&search=&fulltext=Search");
+      driver.findElement(By.xpath("//input[@value='Search'][@type='submit']")).click();
+      driver.findElement(By.id("searchText")).clear();
+      driver.findElement(By.id("searchText")).sendKeys("meow");
+      driver.findElement(By.linkText("Advanced")).click();
+      driver.findElement(By.id("mw-search-ns0")).click();
+      driver.findElement(By.id("mw-search-ns3")).click();
+      driver.findElement(By.cssSelector("input.mw-ui-button.mw-ui-progressive")).click();
+      assertTrue(driver.getPageSource().contains("There were no results matching the query."));
+    }
+    
+    
     
   
   
