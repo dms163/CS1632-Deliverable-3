@@ -9,7 +9,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.util.concurrent.TimeUnit;
 
 public class KirbyTest {
-  static WebDriver driver = new FirefoxDriver();
+  static WebDriver driver = new HtmlUnitDriver();
 
   //start at the homepage for each WiKirby test
   @Before
@@ -280,9 +280,86 @@ public class KirbyTest {
       driver.findElement(By.id("mw-search-ns0")).click();
       driver.findElement(By.id("mw-search-ns3")).click();
       driver.findElement(By.cssSelector("input.mw-ui-button.mw-ui-progressive")).click();
-      assertTrue(driver.getPageSource().contains("There were no results matching the query."));
+      driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+      WebElement e = driver.findElement(By.className("mw-search-nonefound"));
+      assertTrue(e.isDisplayed());
     }
     
+////////////////////////////////////////////////////////////////
+/*User Story 4:
+*As a user,
+*I would like to edit pages on WiKirby,
+*so that I can contribute to the Wiki.
+*/
+///////////////////////////////////////////////////////////////
+
+ /*Scenario 4-1:
+ *Given on WiKirby home page,
+ *and not logged in,
+ *When I click on the Sandbox link,
+ *and try to edit a page,
+ *Then permission should be denied
+ */
+    @Test
+    public void testSandbox() throws Exception {
+      driver.get("http://wikirby.com/wiki/Kirby_Wiki");
+      driver.findElement(By.linkText("Sandbox")).click();
+      driver.findElement(By.linkText("here")).click();
+      WebElement e = driver.findElement(By.className("permissions-errors"));
+      assertTrue(e.isDisplayed());
+    }
+    
+ /*Scenario 4-2:
+ *Given on WiKirby Sandbox page,
+ *When I click on the Users link,
+ *Then I should see a "Bureaucrat" link
+ */
+    @Test
+    public void testUsersLink() throws Exception {
+      driver.get("http://wikirby.com/w/index.php?title=WiKirby:Sandbox&action=edit");
+      driver.findElement(By.linkText("Users")).click();
+      WebElement e = driver.findElement(By.linkText("Bureaucrat"));
+      assertTrue(e.isDisplayed());
+    }
+    
+    /*Scenario 4-3:
+     *Given on WiKirby Users page,
+     *When I click on the Bureaucrat link,
+     *Then I should see the Bureaucrat page, with the term's definition
+     */
+    @Test
+    public void testBureaucrat() throws Exception {
+      driver.get("http://wikirby.com/wiki/WiKirby:Users");
+      driver.findElement(By.linkText("Bureaucrat")).click();
+      assertTrue(driver.getPageSource().contains("in charge"));
+    }
+    
+    /*Scenario 4-4:
+     *Given on WiKirby Sandbox page,
+     *When I click on the "help guide" link,
+     *and then click on the "Basic Editing" link,
+     *Then I should see 
+     */
+    @Test
+    public void testHelp() throws Exception {
+      driver.get("http://wikirby.com/wiki/WiKirby:Sandbox");
+      driver.findElement(By.linkText("help guide")).click();
+      driver.findElement(By.cssSelector("li.toclevel-2.tocsection-2 > a > span.toctext")).click();
+      WebElement e = driver.findElement(By.id("Basic_Editing"));
+      assertTrue(e.isDisplayed());
+    }
+    
+    /*Scenario 4-5:
+     *Given on WiKirby Help page,
+     *When I click on the link that says "here",
+     *Then I should see "Help talk: Contents"
+     */
+    @Test
+    public void testHereHelpLink() throws Exception {
+      driver.get("http://wikirby.com/wiki/Help:Contents#Basic_Editing");
+      driver.findElement(By.cssSelector("span[title=\"Help talk:Contents\"]")).click();
+      assertTrue(driver.getPageSource().contains("Help talk:Contents"));
+    }
     
     
   
